@@ -9,7 +9,7 @@ library (lsmeans)
 library (pbkrtest)
 
 #Read in First Pass Data
-FPs <- read.csv("~/Desktop/Air Work/R analyses/Indirect Request Expt/Experiment 1 - probability of success - Libby's data/FPs.csv")
+FPs <- read.csv("~/FPs.csv")
 
 #this sets up the contrasts so that the intercept in the mixed LMM is the grand mean (i.e., the mean of all conditions)
 my.coding <- matrix (c(.5, -.5))
@@ -31,7 +31,7 @@ lsmeans (fpmodelpostc, pairwise~Meaning*Probability, adjust="none")
 
 
 #Read in Regression Path data
-RPs <- read.csv("~/Desktop/Air Work/R analyses/Indirect Request Expt/Experiment 1 - probability of success - Libby's data/RPs.csv")
+RPs <- read.csv("~/RPs.csv")
 
 contrasts (RPs$Meaning)<-my.coding  
 contrasts (RPs$Probability)<-my.coding 
@@ -50,7 +50,7 @@ summary (rpmodelpostc)
 lsmeans (rpmodelpostc, pairwise~Meaning*Probability, adjust="none")
 
 #Read in total reading time data
-TTs <- read.csv("~/Desktop/Air Work/R analyses/Indirect Request Expt/Experiment 1 - probability of success - Libby's data/TTsb.csv")
+TTs <- read.csv("~/TTsb.csv")
 
 contrasts (TTs$Meaning)<-my.coding  
 contrasts (TTs$Probability)<-my.coding 
@@ -69,7 +69,7 @@ summary (ttmodelpostc)
 lsmeans (ttmodelpostc, pairwise~Meaning*Probability, adjust="none")
 
 #Read in regressions out data
-ROs <- read.csv("~/Desktop/Air Work/R analyses/Indirect Request Expt/Experiment 1 - probability of success - Libby's data/ROs.csv")
+ROs <- read.csv("~/ROs.csv")
 
 contrasts (ROs$Meaning)<-my.coding  
 contrasts (ROs$Probability)<-my.coding 
@@ -97,7 +97,7 @@ romodelpostcf2 <- glmer(response ~ Meaning*Probability + (1+Meaning|Item) , data
 summary (romodelpostcf2)
 
 #Read in regressions in data
-RIs <- read_csv("~/Desktop/Air Work/R analyses/Indirect Request Expt/Experiment 1 - probability of success - Libby's data/RIs.csv")
+RIs <- read_csv("~/RIs.csv")
 
 RIs$Meaning <- as.factor(RIs$Meaning)
 RIs$Probability <- as.factor (RIs$Probability)
