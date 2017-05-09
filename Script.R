@@ -8,6 +8,18 @@ library (lmerTest)
 library (lsmeans) 
 library (pbkrtest)
 
+#Design is 2 x2 
+#Statement Phrasing (Indirect vs Direct) and Degree of Imposition (High vs Low) 
+
+#Example Material with region splits.  The CRITICAL region is the request itself with the IMPOSITION region 
+#where degree of imposition is manipulated.  This example is for HIGH IMPOSITION, INDIRECT request
+#Doug was speeding in his car and was stopped by a traffic cop. 
+#|Traffic cops in this area were known to be dishonest. PRE-CRITICAL (IMPOSITION) REGION
+#| Doug said |“Perhaps there is another way we can resolve this”. CRITICAL REGION
+#| The cop accepted the bribe and Doug avoided the penalty. POST-CRITICAL REGION
+#| Doug was on his way to visit his grandmother.
+
+#First Pass Analysis
 #Read in First Pass Data
 FPs <- read.csv("~/FPs.csv")
 
@@ -33,7 +45,7 @@ fpmodelpostc <- lmer (response ~ Meaning*Imposition + (1+Meaning*Imposition |P.s
 summary (fpmodelpostc)
 lsmeans (fpmodelpostc, pairwise~Meaning*Imposition, adjust="none")
 
-
+#Regression Path Analysis
 #Read in Regression Path data
 RPs <- read.csv("~/RPs.csv")
 
@@ -56,6 +68,7 @@ rpmodelpostc <- lmer (response ~ Meaning*Imposition + (1+Meaning*Imposition |P.s
 summary (rpmodelpostc)
 lsmeans (rpmodelpostc, pairwise~Meaning*Imposition, adjust="none")
 
+#Total Time Analysis
 #Read in total reading time data
 TTs <- read.csv("~/TTs.csv")
 
@@ -78,6 +91,7 @@ ttmodelpostc <- lmer (response ~ Meaning*Imposition + (1+Meaning*Imposition |P.s
 summary (ttmodelpostc)
 lsmeans (ttmodelpostc, pairwise~Meaning*Imposition, adjust="none")
 
+#Regressions Out Analysis
 #Read in regressions out data
 ROs <- read.csv("~/ROs.csv")
 
@@ -109,6 +123,7 @@ lsmeans (romodelpostcf1, pairwise~Meaning*Imposition, adjust="none")
 romodelpostcf2 <- glmer(response ~ Meaning*Imposition + (1+Meaning|Item) , data = ROs, family=binomial) 
 summary (romodelpostcf2)
 
+#Regressions In Analysis
 #Read in regressions in data
 RIs <- read_csv("~/RIs.csv")
 
